@@ -24,7 +24,7 @@ export default async function AdminOrdersPage() {
     'CONFIRMED': 'PREPARING',
     'PREPARING': 'READY',
     'READY': 'OUT_FOR_DELIVERY',
-    // Delivered is usually handled by delivery personnel, but admin could force it. We leave it out to enforce process.
+    'OUT_FOR_DELIVERY': 'DELIVERED', // Allow admins to manually mark as delivered
   }
 
   return (
@@ -87,7 +87,7 @@ export default async function AdminOrdersPage() {
                         <form action={updateOrderStatus}>
                           <input type="hidden" name="id" value={order.id} />
                           <input type="hidden" name="status" value={nextState} />
-                          <Button size="sm" className="bg-primary">
+                          <Button type="submit" size="sm" className="bg-primary">
                             Mark {nextState.replace(/_/g, ' ')}
                           </Button>
                         </form>

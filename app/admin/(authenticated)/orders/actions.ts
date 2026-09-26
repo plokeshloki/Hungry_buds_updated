@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache"
 import { requireAdmin } from "@/lib/auth-utils"
 
 const VALID_TRANSITIONS: Record<string, string[]> = {
+  'PAID': ['CONFIRMED', 'CANCELLED'],
   'CONFIRMED': ['PREPARING', 'CANCELLED'],
   'PREPARING': ['READY', 'CANCELLED'],
   'READY': ['OUT_FOR_DELIVERY', 'CANCELLED'],
@@ -33,19 +34,28 @@ export async function updateOrderStatus(formData: FormData) {
     throw new Error(`Invalid state transition from ${order.status} to ${status}`)
   }
 
-  await supabase
+  const { error: updateError } = await supabase
     .from('orders')
     .update({ status })
     .eq('id', id)
 
+  if (updateError) {
+    console.error('Failed to update order:', updateError)
+    throw new Error('Failed to update order status')
+  }
+
   // Log the action using the authenticated admin's ID
-  await supabase.from('audit_logs').insert({
+  const { error: auditError } = await supabase.from('audit_logs').insert({
     actor_id: adminUser?.id,
     action: 'UPDATE_ORDER_STATUS',
     entity_type: 'ORDER',
     entity_id: id,
     details: { old_status: order.status, new_status: status }
   })
+
+  if (auditError) {
+    console.error('Failed to insert audit log:', auditError)
+  }
 
   revalidatePath('/admin/orders')
   revalidatePath('/admin/dashboard')

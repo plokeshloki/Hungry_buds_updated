@@ -1,5 +1,6 @@
 import { isAdmin } from './auth/roles'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 
 import { redirect } from 'next/navigation'
 
@@ -16,7 +17,8 @@ export async function requireDeliveryOrAdmin() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/delivery/login')
 
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  const supabaseAdmin = createAdminClient()
+  const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', user.id).single()
   
   if (!profile || !['ADMIN', 'SUPER_ADMIN', 'DELIVERY'].includes(profile.role)) {
     redirect('/delivery/login')
