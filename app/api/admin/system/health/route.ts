@@ -63,7 +63,7 @@ export async function GET() {
       : 'DEGRADED'
 
   // 4. Check Razorpay Configuration
-  const rzpKeyId = process.env.RAZORPAY_KEY_ID
+  const rzpKeyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID
   const rzpSecret = process.env.RAZORPAY_KEY_SECRET
   const rzpWebhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET
 
