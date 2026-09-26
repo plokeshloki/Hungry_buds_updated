@@ -111,7 +111,7 @@ export default async function HotelMenuPage(props: { params: Promise<{ hotelId: 
           <div key={cat.id} id={`category-${cat.id}`} className="scroll-mt-40">
             <h2 className="text-3xl font-extrabold mb-8 tracking-tight text-slate-900">{cat.name}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {cat.foods.map(food => (
+              {cat.foods.map((food: any) => (
                 <FoodCard 
                   key={food.id} 
                   food={{...food, is_available: food.is_available && hotel.is_active}} 

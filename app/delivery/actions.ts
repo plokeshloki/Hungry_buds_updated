@@ -53,11 +53,11 @@ export async function verifyAndDeliverOrder(formData: FormData) {
   }
 
   // 4. Log verification
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user: authUser } } = await supabase.auth.getUser()
   
   await supabase.from('delivery_verifications').insert({
     order_id: order.id,
-    verified_by: user?.id || null, // Assuming the delivery person is logged in
+    verified_by: authUser?.id || null, // Assuming the delivery person is logged in
     status: 'SUCCESS'
   })
 

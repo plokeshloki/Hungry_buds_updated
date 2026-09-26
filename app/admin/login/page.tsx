@@ -21,7 +21,9 @@ const loginSchema = z.object({
 
 type LoginForm = z.infer<typeof loginSchema>
 
-export default function LoginPage() {
+import { Suspense } from 'react'
+
+export function LoginContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
@@ -121,5 +123,13 @@ export default function LoginPage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   )
 }

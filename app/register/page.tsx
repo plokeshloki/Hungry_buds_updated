@@ -29,7 +29,9 @@ const registerSchema = z.object({
 
 type RegisterForm = z.infer<typeof registerSchema>
 
-export default function RegisterPage() {
+import { Suspense } from "react";
+
+export function RegisterContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const error = searchParams.get('error')
@@ -167,5 +169,14 @@ export default function RegisterPage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <RegisterContent />
+    </Suspense>
   )
 }

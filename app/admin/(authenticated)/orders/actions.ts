@@ -40,7 +40,7 @@ export async function updateOrderStatus(formData: FormData) {
 
   // Log the action using the authenticated admin's ID
   await supabase.from('audit_logs').insert({
-    actor_id: adminUser.id,
+    actor_id: adminUser?.id,
     action: 'UPDATE_ORDER_STATUS',
     entity_type: 'ORDER',
     entity_id: id,
