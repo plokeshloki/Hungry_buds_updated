@@ -14,7 +14,9 @@ export async function customerLogin(formData: FormData) {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) redirect('/login?error=InvalidCredentials')
   
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', data.user.id).single()
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+  const supabaseAdmin = createAdminClient()
+  const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', data.user.id).single()
   
   if (profile?.role !== 'CUSTOMER') {
     await supabase.auth.signOut()
@@ -35,7 +37,9 @@ export async function adminLogin(formData: FormData) {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) redirect('/admin/login?error=InvalidCredentials')
   
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', data.user.id).single()
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+  const supabaseAdmin = createAdminClient()
+  const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', data.user.id).single()
   
   if (profile?.role !== 'ADMIN' && profile?.role !== 'SUPER_ADMIN') {
     await supabase.auth.signOut()
@@ -56,7 +60,9 @@ export async function deliveryLogin(formData: FormData) {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password })
   if (error) redirect('/delivery/login?error=InvalidCredentials')
   
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', data.user.id).single()
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+  const supabaseAdmin = createAdminClient()
+  const { data: profile } = await supabaseAdmin.from('profiles').select('role').eq('id', data.user.id).single()
   
   if (profile?.role !== 'DELIVERY') {
     await supabase.auth.signOut()
