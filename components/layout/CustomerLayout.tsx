@@ -12,9 +12,10 @@ import { logout } from '@/app/actions'
 
 interface CustomerLayoutProps {
   children: ReactNode
+  user?: any
 }
 
-export function CustomerLayout({ children }: CustomerLayoutProps) {
+export function CustomerLayout({ children, user }: CustomerLayoutProps) {
   const pathname = usePathname()
   const { items } = useCartStore()
   const cartCount = items.reduce((total, item) => total + item.quantity, 0)
@@ -58,11 +59,19 @@ export function CustomerLayout({ children }: CustomerLayoutProps) {
                 )}
               </Link>
             ))}
-            <form action={logout} className="ml-2">
-              <Button type="submit" variant="ghost" size="sm" className="text-muted-foreground hover:text-red-500 hover:bg-red-50">
-                Logout
-              </Button>
-            </form>
+            {user ? (
+              <form action={logout} className="ml-2">
+                <Button type="submit" variant="ghost" size="sm" className="text-muted-foreground hover:text-red-500 hover:bg-red-50">
+                  Logout
+                </Button>
+              </form>
+            ) : (
+              <Link href="/login" className="ml-2">
+                <Button variant="default" size="sm" className="bg-[#d84f4b] hover:bg-[#c4433f] text-white">
+                  Login
+                </Button>
+              </Link>
+            )}
           </nav>
         </div>
       </header>
