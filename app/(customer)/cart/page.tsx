@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { CartClient } from "@/components/cart/CartClient"
 
 export const metadata = {
-  title: 'Your Cart | HostelBites',
+  title: 'Your Cart | HungryBuds',
 }
 
 export default async function CartPage() {

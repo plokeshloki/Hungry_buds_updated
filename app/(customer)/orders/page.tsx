@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import { ChevronRight, Package, ListOrdered } from 'lucide-react'
 
 export const metadata = {
-  title: 'My Orders | HostelBites',
+  title: 'My Orders | HungryBuds',
 }
 
 export default async function OrdersPage() {

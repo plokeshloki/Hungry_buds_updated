@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { ProfileForm } from '@/components/customer/ProfileForm'
 
 export const metadata = {
-  title: 'My Profile | HostelBites',
+  title: 'My Profile | HungryBuds',
 }
 
 export default async function ProfilePage() {

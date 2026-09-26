@@ -6,7 +6,7 @@ import { format } from "date-fns"
 import { updateOrderStatus } from "./actions"
 
 export const metadata = {
-  title: 'Manage Orders | HostelBites Admin',
+  title: 'Manage Orders | HungryBuds Admin',
 }
 
 export default async function AdminOrdersPage() {

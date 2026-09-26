@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server"
 import { CheckoutClient } from "@/components/checkout/CheckoutClient"
 
 export const metadata = {
-  title: 'Checkout | HostelBites',
+  title: 'Checkout | HungryBuds',
 }
 
 export default async function CheckoutPage() {

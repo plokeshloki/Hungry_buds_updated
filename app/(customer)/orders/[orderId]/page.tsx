@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import { ArrowLeft, CheckCircle2, Clock, MapPin, Package, ShieldCheck } from 'lucide-react'
 
 export const metadata = {
-  title: 'Order Details | HostelBites',
+  title: 'Order Details | HungryBuds',
 }
 
 export default async function OrderDetailsPage(props: { params: Promise<{ orderId: string }> }) {

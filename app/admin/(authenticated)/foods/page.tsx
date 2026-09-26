@@ -6,7 +6,7 @@ import { Plus, Search } from "lucide-react"
 import { toggleFoodStatus } from "./actions"
 
 export const metadata = {
-  title: 'Manage Foods | HostelBites Admin',
+  title: 'Manage Foods | HungryBuds Admin',
 }
 
 export default async function AdminFoodsPage() {

@@ -6,7 +6,7 @@ import { MapPin, Phone, PackageCheck } from "lucide-react"
 import { VerifyOrderForm } from "@/components/delivery/VerifyOrderForm"
 
 export const metadata = {
-  title: 'Delivery Hub | HostelBites',
+  title: 'Delivery Hub | HungryBuds',
 }
 
 export default async function DeliveryDashboard() {

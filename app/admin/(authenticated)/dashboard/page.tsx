@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ShoppingBag, TrendingUp, Store, Clock } from "lucide-react"
 
 export const metadata = {
-  title: 'Admin Dashboard | HostelBites',
+  title: 'Admin Dashboard | HungryBuds',
 }
 
 export default async function AdminDashboardPage() {

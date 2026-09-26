@@ -7,7 +7,7 @@ import { Switch } from "@/components/ui/switch"
 import { updateSettings } from "./actions"
 
 export const metadata = {
-  title: 'Platform Settings | HostelBites Admin',
+  title: 'Platform Settings | HungryBuds Admin',
 }
 
 export default async function AdminSettingsPage() {

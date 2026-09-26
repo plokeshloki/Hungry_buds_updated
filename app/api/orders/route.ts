@@ -19,7 +19,10 @@ export async function POST(request: Request) {
     }
 
     // 2. Enforce System Health Settings (Ordering Status)
-    const { data: settings } = await supabase
+    const { createAdminClient } = await import('@/lib/supabase/admin')
+    const supabaseAdmin = createAdminClient()
+
+    const { data: settings } = await supabaseAdmin
       .from('settings')
       .select('*')
       .single()
@@ -39,11 +42,14 @@ export async function POST(request: Request) {
     const rzp = new Razorpay({ key_id, key_secret })
 
     // 4. Verify prices and stock from DB (Server is authoritative)
+
     const foodIds = items.map((i: any) => i.id)
-    const { data: dbFoods } = await supabase
+    const { data: dbFoods, error: foodError } = await supabaseAdmin
       .from('foods')
       .select('id, price, stock, is_available')
       .in('id', foodIds)
+
+    console.log("DEBUG CHECKOUT - foodIds:", foodIds, "dbFoods length:", dbFoods?.length, "error:", foodError)
 
     if (!dbFoods || dbFoods.length !== items.length) {
       return NextResponse.json({ error: 'Some items are no longer available.' }, { status: 400 })
@@ -63,9 +69,6 @@ export async function POST(request: Request) {
     const calculatedTotal = calculatedSubtotal + serverDeliveryFee
 
     // 5. Create Order in DB securely using Service Role to prevent tampering
-    const { createAdminClient } = await import('@/lib/supabase/admin')
-    const supabaseAdmin = createAdminClient()
-
     const { data: order, error: orderError } = await supabaseAdmin
       .from('orders')
       .insert({

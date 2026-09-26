@@ -55,7 +55,7 @@ export default function LoginPage() {
             <div className="bg-primary p-2 rounded-full">
               <ShoppingBag className="h-6 w-6 text-primary-foreground" />
             </div>
-            <span className="font-bold text-2xl text-primary tracking-tight">HostelBites</span>
+            <span className="font-bold text-2xl text-primary tracking-tight">HungryBuds</span>
           </Link>
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Delivery Hub Login</h1>
           <p className="text-sm text-muted-foreground mt-2">Login to manage your deliveries.</p>

@@ -6,7 +6,7 @@ import { Store, Plus } from "lucide-react"
 import { toggleHotelStatus } from "./actions"
 
 export const metadata = {
-  title: 'Manage Hotels | HostelBites Admin',
+  title: 'Manage Hotels | HungryBuds Admin',
 }
 
 export default async function AdminHotelsPage() {
