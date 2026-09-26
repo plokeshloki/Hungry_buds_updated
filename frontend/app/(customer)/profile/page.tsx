@@ -1,0 +1,36 @@
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import { ProfileForm } from '@/components/customer/ProfileForm'
+
+export const metadata = {
+  title: 'My Profile | HostelBites',
+}
+
+export default async function ProfilePage() {
+  const supabase = await createClient()
+  
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    redirect('/login?returnTo=/profile')
+  }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single()
+
+  return (
+    <div className="max-w-2xl mx-auto space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">My Profile</h1>
+        <p className="text-muted-foreground">Manage your personal information and delivery details.</p>
+      </div>
+      
+      <ProfileForm 
+        profile={profile || { id: user.id }} 
+        email={user.email || ''} 
+      />
+    </div>
+  )
+}
