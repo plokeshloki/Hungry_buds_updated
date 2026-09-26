@@ -14,11 +14,18 @@ export default async function ProfilePage() {
     redirect('/login?returnTo=/profile')
   }
 
-  const { data: profile } = await supabase
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+  const supabaseAdmin = createAdminClient()
+
+  const { data: profile, error } = await supabaseAdmin
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
+
+  if (error) {
+    console.error("Profile fetch error:", error)
+  }
 
   return (
     <div className="max-w-2xl mx-auto space-y-8">

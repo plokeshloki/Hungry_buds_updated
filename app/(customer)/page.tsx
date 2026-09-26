@@ -25,22 +25,29 @@ export default async function Home() {
     <div className="flex flex-col gap-16 pb-16">
       
       {/* SECTION 1: HERO */}
-      <section className="relative overflow-hidden rounded-[2.5rem] bg-[#fdfaf8] px-6 py-28 sm:px-12 sm:py-36 lg:px-16 flex flex-col items-center text-center mx-2 mt-4 shadow-sm">
-        <h1 className="max-w-3xl text-5xl font-extrabold tracking-tight text-slate-900 sm:text-7xl mb-6 font-serif">
+      <section className="relative overflow-hidden rounded-[2.5rem] backdrop-blur-xl bg-white/75 border border-white/90 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.07)] px-6 py-20 sm:px-12 sm:py-28 lg:px-16 flex flex-col items-center text-center mx-2 mt-2">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-red-500/20 text-[#d84f4b] text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+          <span>🚀 Fast Campus Delivery</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#d84f4b]" />
+          <span>Direct to Hostel</span>
+        </div>
+        
+        <h1 className="max-w-3xl text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 font-serif">
           Good food, delivered to <br className="hidden sm:block" /> your hostel.
         </h1>
-        <p className="max-w-xl text-lg text-slate-600 mb-10">
-          Order from your favourite local hotels and get your meal without leaving campus. Fast, fresh, and reliable.
+        <p className="max-w-xl text-base sm:text-lg text-slate-600 mb-9 leading-relaxed">
+          Order from your favourite local restaurants and get delicious hot meals without leaving campus. Fast, fresh, and reliable.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Button asChild size="lg" className="rounded-full px-8 bg-[#d84f4b] hover:bg-[#c74140] text-white">
+        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <Button asChild size="lg" className="rounded-full px-8 bg-gradient-to-r from-[#ea580c] to-[#d84f4b] hover:from-[#c2410c] hover:to-[#be123c] text-white shadow-lg shadow-[#d84f4b]/25 transition-all hover:scale-105 active:scale-95">
             <Link href="/hotels">Browse Food <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="rounded-full px-8 bg-white text-slate-700 border-slate-200 hover:bg-slate-50">
+          <Button asChild variant="outline" size="lg" className="rounded-full px-8 bg-white/90 backdrop-blur-sm text-slate-700 border-slate-200/80 hover:bg-white hover:text-slate-900 shadow-sm transition-all hover:scale-105 active:scale-95">
             <Link href="/orders">View Orders</Link>
           </Button>
         </div>
       </section>
+
 
       {/* SECTION 2: ORDERING STATUS */}
       <section className="mx-auto w-full max-w-5xl px-4">

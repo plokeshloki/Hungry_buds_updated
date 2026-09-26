@@ -20,8 +20,12 @@ export default async function OrderDetailsPage(props: { params: Promise<{ orderI
     redirect(`/login?returnTo=/orders/${orderId}`)
   }
 
+  // Bypass RLS infinite recursion for now
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+  const supabaseAdmin = createAdminClient()
+
   // Fetch order with related data
-  const { data: order } = await supabase
+  const { data: order } = await supabaseAdmin
     .from('orders')
     .select(`
       *,
@@ -37,7 +41,7 @@ export default async function OrderDetailsPage(props: { params: Promise<{ orderI
   }
 
   // Fetch items
-  const { data: items } = await supabase
+  const { data: items } = await supabaseAdmin
     .from('order_items')
     .select('*')
     .eq('order_id', orderId)

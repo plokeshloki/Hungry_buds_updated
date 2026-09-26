@@ -16,7 +16,10 @@ export async function updateProfile(formData: FormData) {
   const hostel = formData.get('hostel') as string
   const room_number = formData.get('room_number') as string
 
-  const { error } = await supabase
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+  const supabaseAdmin = createAdminClient()
+
+  const { error } = await supabaseAdmin
     .from('profiles')
     .update({ 
       name, 

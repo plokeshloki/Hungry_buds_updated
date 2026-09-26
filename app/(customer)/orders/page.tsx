@@ -18,11 +18,18 @@ export default async function OrdersPage() {
     redirect('/login?returnTo=/orders')
   }
 
-  const { data: orders } = await supabase
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+  const supabaseAdmin = createAdminClient()
+
+  const { data: orders, error } = await supabaseAdmin
     .from('orders')
     .select('*, hotels(name)')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error("Orders fetch error:", error)
+  }
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-16">

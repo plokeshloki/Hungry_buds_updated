@@ -74,7 +74,7 @@ export function CheckoutClient({ profile, deliveryFee, isOrderingOpen, isPayment
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
         amount: data.razorpayOrder.amount,
         currency: data.razorpayOrder.currency,
-        name: "HostelBites",
+        name: "HungryBuds",
         description: `Order from ${items[0].hotel_name}`,
         order_id: data.razorpayOrder.id,
         handler: async function (response: any) {
@@ -110,7 +110,7 @@ export function CheckoutClient({ profile, deliveryFee, isOrderingOpen, isPayment
           contact: profile.phone || ""
         },
         theme: {
-          color: "#10b981" // primary emerald color
+          color: "#d84f4b"
         },
         modal: {
           ondismiss: function() {
